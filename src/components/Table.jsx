@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { getCharacters } from "../../api/api";
+import "../index.css"
+import ClipLoader from "react-spinners/ClipLoader";
+
 
 const RickAndMortyApp = () => {
   const [characters, setCharacters] = useState([]); //Characters
@@ -53,14 +56,15 @@ const RickAndMortyApp = () => {
           <option value="unknown">Unknown</option>
         </select>
       </div>
-
       {/* Character list */}
       {isLoading ? (
-        <p>Loading...</p>
+        <div className="loading-overlay">
+        <ClipLoader color="#ffffff" size={100} />
+      </div>
       ) : (
-        <ul>
+        <ul className="character-list">
           {characters.map((character) => (
-            <li key={character.id}>
+            <li className="character-item" key={character.id}>
               <img src={character.image} alt={character.name} />
               <p>{character.name}</p>
               <p>Status: {character.status}</p>
@@ -85,4 +89,3 @@ const RickAndMortyApp = () => {
 };
 
 export default RickAndMortyApp;
-
